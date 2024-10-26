@@ -141,7 +141,7 @@ def get_role_id(role_name: str):
 @app.post("/register")
 async def register_user(user: Register):
     try:
-        KeycloakAdmin.create_user({
+        keycloak_admin.create_user({
             "email": user.email,
             "username": user.email,
             "enabled": True,
@@ -157,6 +157,7 @@ async def register_user(user: Register):
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
+
     
 @app.post("/sign-in")
 async def sign_in(user: UserSignInRequest):
